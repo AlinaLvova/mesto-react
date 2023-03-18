@@ -1,20 +1,21 @@
 import {useState} from 'react';
 import image_404 from './../images/404.webp';
 
-function ImagePopup(props) {
+function ImagePopup({card, onClose}) {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
+    console.log('card=', card);
     setImageError(true);
   };
 
   const handleClosePopup = () => {
-    props.onClose();
+    onClose();
   };
   return (
     <div
       className={`popup popup_opacity-img ${
-        props.card !== "" ? "popup_opened" : ""
+        card.link ? "popup_opened" : ""
       }`}
       id="popup-open-img"
     >
@@ -29,8 +30,8 @@ function ImagePopup(props) {
           <img 
           className="popup__image" 
           type="button" 
-          src={props.card?.link || image_404}
-          alt={`Фото пользователя: ${props.card?.name || ""}`}
+          src={card.link}
+          alt={`Фото пользователя: ${card.name}`}
           onError={handleImageError}
           />
         )}

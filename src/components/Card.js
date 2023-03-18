@@ -9,12 +9,13 @@ function Card(card) {
   };
 
   const handleClick = () => {
+    console.log(card);
     card.onCardClick(card);
   }  
 
   return (
     <li className="card" key={card.id}>
-      <article onClick={handleClick}>
+      <article>
         <button
           className={`card__delete link ${card.isOwner ? 'card__delete_active' : ''}`}
           aria-label="to-delete-card"
@@ -24,6 +25,7 @@ function Card(card) {
           className="card__image" 
           src={image_404} 
           alt="image not found" 
+          onClick={handleClick}
           />
         ) : (
           <img
@@ -31,6 +33,7 @@ function Card(card) {
             src={card.link}
             onError={handleImageError}
             alt={`Фото пользователя: ${card.name}`}
+            onClick={handleClick}
           />
         )}
         <div className="card__footer">
