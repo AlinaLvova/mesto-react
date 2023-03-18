@@ -25,13 +25,13 @@ function ImagePopup({card, onClose}) {
           className="popup__image" 
           type="button" 
           src={image_404}
-          alt="image not found" />
+          alt="not found" />
         ) : (
           <img 
           className="popup__image" 
           type="button" 
           src={card.link}
-          alt={`Фото пользователя: ${card.name}`}
+          alt={`пользователя: ${card.name}`}
           onError={handleImageError}
           />
         )}
