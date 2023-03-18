@@ -15,7 +15,6 @@ function Main(props) {
          setUserAvatar(infoData.avatar);
          setUserAbout(infoData.about);
          const idOwner = infoData._id;
-         console.log(idOwner);
          api.getCardList()
          .then(cardListData => {
             setCards(cardListData.map((card) => ({
