@@ -27,7 +27,6 @@ function Main(props) {
                 isOwner: idOwner === card.owner._id,
                 isLiked: card.likes.some(like => like._id === idOwner)
              })));
-             console.log(cards);
          }) 
          .catch((error) => {
             console.log(error.message);
