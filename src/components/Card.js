@@ -8,9 +8,13 @@ function Card(card) {
     setImageError(true);
   };
 
+  const handleClick = () => {
+    card.onCardClick(card);
+  }  
+
   return (
     <li className="card" key={card.id}>
-      <article>
+      <article onClick={handleClick}>
         <button
           className={`card__delete link ${card.isOwner ? 'card__delete_active' : ''}`}
           aria-label="to-delete-card"
@@ -26,7 +30,7 @@ function Card(card) {
             className="card__image"
             src={card.link}
             onError={handleImageError}
-            alt={card.name}
+            alt={`Фото пользователя: ${card.name}`}
           />
         )}
         <div className="card__footer">

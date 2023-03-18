@@ -80,10 +80,17 @@ function Main(props) {
 
       <section className="gallery">
         <ul className="gallery__list">
-          {cards.map((card) => 
-            <Card name={card.name} link={card.link} key={card.id} likes={card.likes} isOwner={card.isOwner} isLiked={card.isLiked}/>
-          )
-          }
+          {cards.map((card) => (
+            <Card
+              name={card.name}
+              link={card.link}
+              key={card.id}
+              likes={card.likes}
+              isOwner={card.isOwner}
+              isLiked={card.isLiked}
+              onCardClick={props.onCardClick}
+            />
+          ))}
         </ul>
       </section>
     </main>
