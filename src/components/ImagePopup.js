@@ -5,7 +5,6 @@ function ImagePopup({card, onClose}) {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
-    console.log('card=', card);
     setImageError(true);
   };
 
