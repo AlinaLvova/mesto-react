@@ -1,13 +1,11 @@
 .profile__avatar-button{
     margin: 0;
     padding: 0;
-    position: relative;
     background-color: transparent;
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    top: 0px;
-    right: 0px;
+    border: 0px;
     cursor: pointer;
 }
 
@@ -28,6 +26,7 @@
     top: 0;
     right: 0px;
     opacity:0;
+    box-sizing: border-box;
     transition: opacity .8s ease-in-out;
 }
 

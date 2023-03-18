@@ -9,7 +9,7 @@ class Api{
         if (response.ok) {
             return response.json();
         }
-        return Promise.reject(new Error(`Ошибка: ${res.status}. Сообщение об ошибке: ${errorMessage}`));
+        return Promise.reject(new Error(`Ошибка: ${response.status}. Сообщение об ошибке: ${errorMessage}`));
     };
 
     sentCard({name, link}){
