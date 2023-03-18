@@ -1,6 +1,4 @@
 function PopupWithForm(props){
-    const name = props.name; //имя идентификатора попапа
-
     return(
         <div className={`popup ${props.isOpen ? 'popup_opened':''}`} id={`popup-${props.name}`}>
             <div className="popup__container">
