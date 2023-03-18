@@ -24,8 +24,8 @@ function Main(props) {
                 link: card.link,
                 likes: card.likes,
                 owner: card.owner,
-                isOwner: idOwner == card.owner._id,
-                isLiked: card.likes.some(like => like._id == idOwner)
+                isOwner: idOwner === card.owner._id,
+                isLiked: card.likes.some(like => like._id === idOwner)
              })));
              console.log(cards);
          }) 
