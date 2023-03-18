@@ -24,7 +24,7 @@ function Card(card) {
           <img 
           className="card__image" 
           src={image_404} 
-          alt="image not found" 
+          alt="not found" 
           onClick={handleClick}
           />
         ) : (
@@ -32,7 +32,7 @@ function Card(card) {
             className="card__image"
             src={card.link}
             onError={handleImageError}
-            alt={`Фото пользователя: ${card.name}`}
+            alt={`пользователя: ${card.name}`}
             onClick={handleClick}
           />
         )}
