@@ -34,7 +34,7 @@ function ImagePopup({card, onClose}) {
           onError={handleImageError}
           />
         )}
-        <figcaption className="popup__figcaption"></figcaption>
+        <figcaption className="popup__figcaption">{card.name}</figcaption>
         <button
           className="popup__close-btn link"
           id="close-btn-img"
