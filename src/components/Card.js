@@ -1,9 +1,9 @@
-import {useState, useContext} from 'react';
-import { CurrentUserContext } from './../contexts/CurrentUserContext';
-import image_404 from './../images/404.webp';
+import { useState, useContext } from "react";
+import { CurrentUserContext } from "./../contexts/CurrentUserContext";
+import image_404 from "./../images/404.webp";
 
 function Card(card) {
-  const currentUser = useContext(CurrentUserContext);
+  
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -12,21 +12,30 @@ function Card(card) {
 
   const handleClick = () => {
     card.onCardClick(card);
-  }  
+  };
+  
+  const currentUser = useContext(CurrentUserContext);
+
+  const isOwner = currentUser._id === card.owner._id;
+  const isLiked = card.likes.some(like => like._id === currentUser._id);
+             
+  const cardLikeButtonClassName = `card__like link ${isLiked && 'card__like_active' }`;
 
   return (
     <li className="card" key={card.id}>
       <article>
-        <button
-          className={`card__delete link ${card.isOwner ? 'card__delete_active' : ''}`}
-          aria-label="to-delete-card"
-        ></button>
+        {isOwner && (
+          <button
+            className="card__delete link card__delete_active"
+            aria-label="to-delete-card"
+          ></button>
+        )}
         {imageError ? (
-          <img 
-          className="card__image" 
-          src={image_404} 
-          alt="not found" 
-          onClick={handleClick}
+          <img
+            className="card__image"
+            src={image_404}
+            alt="not found"
+            onClick={handleClick}
           />
         ) : (
           <img
@@ -41,11 +50,13 @@ function Card(card) {
           <h2 className="card__title">{card.name}</h2>
           <div className="card__like-container">
             <button
-              className={`card__like link ${card.isLiked ? 'card__like_active' : ''}`}
+              className={cardLikeButtonClassName}
               type="button"
               aria-label="liked"
             ></button>
-            <h4 className="card__like-counter">{card.likes.length > 0 ? card.likes.length : ""}</h4>
+            <h4 className="card__like-counter">
+              {card.likes.length > 0 ? card.likes.length : ""}
+            </h4>
           </div>
         </div>
       </article>

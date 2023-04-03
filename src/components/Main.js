@@ -4,11 +4,10 @@ import Card from './Card';
 import { CurrentUserContext } from './../contexts/CurrentUserContext';
 
 function Main(props) {
-  const userData = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-         const idOwner = userData._id;
          api.getCardList()
          .then(cardListData => {
             setCards(cardListData.map((card) => ({
@@ -17,15 +16,11 @@ function Main(props) {
                 link: card.link,
                 likes: card.likes,
                 owner: card.owner,
-                isOwner: idOwner === card.owner._id,
-                isLiked: card.likes.some(like => like._id === idOwner)
-             })));
+                })));
          }) 
          .catch((error) => {
             console.log(error.message);
           });
-    
-        
   }, []);
 
   return (
@@ -35,7 +30,7 @@ function Main(props) {
           <div className="profile__avatar-container">
             <img
               className="profile__avatar"
-              style={{ backgroundImage: `url(${userData.avatar})` }}
+              style={{ backgroundImage: `url(${currentUser.avatar})` }}
               alt=""
             />
             <button
@@ -47,7 +42,7 @@ function Main(props) {
           </div>
           <div className="profile__info">
             <div className="profile__group-name-btn">
-              <h1 className="profile__name">{userData.name}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button
                 className="profile__edit-button link"
                 type="button"
@@ -55,7 +50,7 @@ function Main(props) {
                 onClick={props.onEditProfile}
               ></button>
             </div>
-            <p className="profile__about">{userData.about}</p>
+            <p className="profile__about">{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -74,8 +69,7 @@ function Main(props) {
               link={card.link}
               key={card.id}
               likes={card.likes}
-              isOwner={card.isOwner}
-              isLiked={card.isLiked}
+              owner={card.owner}
               onCardClick={props.onCardClick}
             />
           ))}
