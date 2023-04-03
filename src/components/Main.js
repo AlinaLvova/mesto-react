@@ -1,20 +1,14 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import api from '../utils/Api';
 import Card from './Card';
+import { CurrentUserContext } from './../contexts/CurrentUserContext';
 
 function Main(props) {
-  const [userName, setUserName] = useState();
-  const [userAbout , setUserAbout] = useState();
-  const [userAvatar, setUserAvatar] = useState();
+  const userData = useContext(CurrentUserContext);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-     api.getUserInfo()
-       .then(infoData => {
-         setUserName(infoData.name);
-         setUserAvatar(infoData.avatar);
-         setUserAbout(infoData.about);
-         const idOwner = infoData._id;
+         const idOwner = userData._id;
          api.getCardList()
          .then(cardListData => {
             setCards(cardListData.map((card) => ({
@@ -31,11 +25,7 @@ function Main(props) {
             console.log(error.message);
           });
     
-       })
-       .catch((error) => {
-         console.log(error.message);
-       });
-     
+        
   }, []);
 
   return (
@@ -45,7 +35,7 @@ function Main(props) {
           <div className="profile__avatar-container">
             <img
               className="profile__avatar"
-              style={{ backgroundImage: `url(${userAvatar})` }}
+              style={{ backgroundImage: `url(${userData.avatar})` }}
               alt=""
             />
             <button
@@ -57,7 +47,7 @@ function Main(props) {
           </div>
           <div className="profile__info">
             <div className="profile__group-name-btn">
-              <h1 className="profile__name">{userName}</h1>
+              <h1 className="profile__name">{userData.name}</h1>
               <button
                 className="profile__edit-button link"
                 type="button"
@@ -65,7 +55,7 @@ function Main(props) {
                 onClick={props.onEditProfile}
               ></button>
             </div>
-            <p className="profile__about">{userAbout}</p>
+            <p className="profile__about">{userData.about}</p>
           </div>
         </div>
         <button

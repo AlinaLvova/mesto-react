@@ -1,7 +1,9 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+import { CurrentUserContext } from './../contexts/CurrentUserContext';
 import image_404 from './../images/404.webp';
 
 function Card(card) {
+  const currentUser = useContext(CurrentUserContext);
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
