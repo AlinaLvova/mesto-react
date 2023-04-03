@@ -3,7 +3,12 @@ import { CurrentUserContext } from "./../contexts/CurrentUserContext";
 import image_404 from "./../images/404.webp";
 
 function Card(card) {
-  
+  const currentUser = useContext(CurrentUserContext);
+
+  const isOwner = currentUser._id === card.owner._id;
+  const isLiked = card.likes.some(like => like._id === currentUser._id);
+  const cardLikeButtonClassName = `card__like link ${isLiked && 'card__like_active' }`;
+
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -13,16 +18,13 @@ function Card(card) {
   const handleClick = () => {
     card.onCardClick(card);
   };
-  
-  const currentUser = useContext(CurrentUserContext);
 
-  const isOwner = currentUser._id === card.owner._id;
-  const isLiked = card.likes.some(like => like._id === currentUser._id);
-             
-  const cardLikeButtonClassName = `card__like link ${isLiked && 'card__like_active' }`;
-
+  const handleClickLikeCard = () => {
+    card.onCardLike(card);
+  }
+         
   return (
-    <li className="card" key={card.id}>
+    <li className="card" key={card._id}>
       <article>
         {isOwner && (
           <button
@@ -53,6 +55,7 @@ function Card(card) {
               className={cardLikeButtonClassName}
               type="button"
               aria-label="liked"
+              onClick={handleClickLikeCard}
             ></button>
             <h4 className="card__like-counter">
               {card.likes.length > 0 ? card.likes.length : ""}

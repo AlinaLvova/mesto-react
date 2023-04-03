@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "esm": "^3.2.25",
     "gh-pages": "^5.0.0",
     "install": "^0.13.0"
   },

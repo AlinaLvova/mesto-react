@@ -66,6 +66,14 @@ class Api{
             return this._handleResponse(response, "Данные о пользователе не были успешно получены")
         });
     }
+
+    //поменять статус лайка на карточке
+    changeLikeCardStatus(cardId, isLiked){
+        if (!isLiked)
+            return this.deleteLike(cardId);
+        else
+            return this.setLike(cardId);
+    }
     
     //поставить лайк карточке
     setLike(cardId){
@@ -86,7 +94,8 @@ class Api{
         })
         .then((response) => {
             return this._handleResponse(response, "Данные об удалении лайка карточке от попользователе не были успешно обновлены на сервере")
-        });    }
+        });    
+    }
 
     //удалить карточку по id
     deleteCard(cardId){

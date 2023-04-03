@@ -5,23 +5,6 @@ import { CurrentUserContext } from './../contexts/CurrentUserContext';
 
 function Main(props) {
   const currentUser = useContext(CurrentUserContext);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-         api.getCardList()
-         .then(cardListData => {
-            setCards(cardListData.map((card) => ({
-                id: card._id,
-                name: card.name,
-                link: card.link,
-                likes: card.likes,
-                owner: card.owner,
-                })));
-         }) 
-         .catch((error) => {
-            console.log(error.message);
-          });
-  }, []);
 
   return (
     <main className="content">
@@ -63,14 +46,16 @@ function Main(props) {
 
       <section className="gallery">
         <ul className="gallery__list">
-          {cards.map((card) => (
+          {props.cards.map((card) => (
             <Card
               name={card.name}
               link={card.link}
-              key={card.id}
+              key={card._id}
               likes={card.likes}
               owner={card.owner}
+              _id={card._id}
               onCardClick={props.onCardClick}
+              onCardLike={props.onCardLike}
             />
           ))}
         </ul>
