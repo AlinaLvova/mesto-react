@@ -10,6 +10,7 @@ import {
   currentUserData,
 } from "./../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -59,40 +60,47 @@ function App() {
   const handleAddCardClick = () => {
     setIsAddCardPopupOpen(true);
   };
-
+  
   const closeAllPopups = () => {
     setIsUpdateAvatarPopupOpen(false);
     setIsAddCardPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setSelectedCard({});
   };
-
+  
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
-
+  
   const handleCardLike = (card) => {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
   } 
-
+  
   const handleCardDelete = (card) => {
     api.deleteCard(card._id).then((response) => {
       setCards((state) => state.filter((c) => c._id !== card._id ? c : null));
     });
   } 
-
+  
   const handleUpdateUser = ({name, about}) => {
     api.updateUserInfo(name, about).then((user) => {
       setCurrentUser(user);
     });
-
+    
   }
+  
+  const handleUpdateAvatar = ({ avatar }) => {
+    api.updateAvatar(avatar).then(() => {
+      currentUser.avatar = avatar;
+      setCurrentUser(currentUser);
+    });
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -123,23 +131,12 @@ function App() {
             onClose={closeAllPopups}
           ></PopupWithForm>
           {/* popup: update avatar */}
-          <PopupWithForm
-            name="update-avatar"
-            title="Обновить аватар"
-            buttonTitle="Да"
+          <EditAvatarPopup
             isOpen={isUpdateAvatarPopupOpen}
             onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
           >
-            <input
-              id="input-link"
-              name="input-link-on-img"
-              type="url"
-              className="popup__input-field"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span className="input-link-error popup__input-field-error"></span>
-          </PopupWithForm>
+          </EditAvatarPopup>
           {/* popup: add new card */}
           <PopupWithForm
             name="add-card"
