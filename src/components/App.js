@@ -11,6 +11,7 @@ import {
 } from "./../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -138,34 +139,10 @@ function App() {
           >
           </EditAvatarPopup>
           {/* popup: add new card */}
-          <PopupWithForm
-            name="add-card"
-            title="Новое место"
-            buttonTitle="Создать"
+          <AddPlacePopup
             isOpen={isAddCardPopupOpen}
-            onClose={closeAllPopups}
-          >
-            <input
-              id="input-title"
-              name="name"
-              type="text"
-              className="popup__input-field"
-              placeholder="Название"
-              minLength="2"
-              maxLength="30"
-              required
-            />
-            <span className="input-title-error popup__input-field-error"></span>
-            <input
-              id="input-link"
-              name="link"
-              type="url"
-              className="popup__input-field"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span className="input-link-error popup__input-field-error"></span>
-          </PopupWithForm>
+            onClose={closeAllPopups}>
+          </AddPlacePopup>
           {/* popup: open card */}
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         </div>
