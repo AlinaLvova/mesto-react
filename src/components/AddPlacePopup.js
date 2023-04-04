@@ -17,8 +17,7 @@ function AddPlacePopup(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setButtonTitle("Сохранение...");
-    props
-      .onAddPlace({
+    props.onAddPlace({
         name: cardName,
         link: cardLink,
       })
