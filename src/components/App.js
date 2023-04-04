@@ -102,9 +102,13 @@ function App() {
   };
 
   const handleUpdateUser = ({ name, about }) => {
-    api.updateUserInfo(name, about).then((user) => {
+    api.updateUserInfo(name, about)
+    .then((user) => {
       setCurrentUser(user);
       closeAllPopups();
+    })
+    .catch((error) => {
+      console.log(error);
     });
   };
 
