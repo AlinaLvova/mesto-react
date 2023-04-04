@@ -29,8 +29,6 @@ function EditProfilePopup(props) {
       name,
       about
     });
-
-    props.onClose();
   };
 
   return (

@@ -10,10 +10,8 @@ function EditAvatarPopup(props) {
 
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateAvatar({
-        avatar: avatarInput.current && avatarInput.current.value
+        avatar: avatarInput.current.value
     });
-
-    props.onClose();
   };
 
   return (

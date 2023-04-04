@@ -92,6 +92,7 @@ function App() {
   const handleUpdateUser = ({name, about}) => {
     api.updateUserInfo(name, about).then((user) => {
       setCurrentUser(user);
+      closeAllPopups();
     });
     
   }
@@ -100,6 +101,14 @@ function App() {
     api.updateAvatar(avatar).then(() => {
       currentUser.avatar = avatar;
       setCurrentUser(currentUser);
+      closeAllPopups();
+    });
+  };
+
+  const handleAddPlaceSubmit = ({ name, link }) => {
+    return api.sentCard({name, link}).then((newCard) => {
+      setCards([newCard, ...cards]); 
+      closeAllPopups();
     });
   };
 
@@ -141,6 +150,7 @@ function App() {
           {/* popup: add new card */}
           <AddPlacePopup
             isOpen={isAddCardPopupOpen}
+            onAddPlace={handleAddPlaceSubmit}
             onClose={closeAllPopups}>
           </AddPlacePopup>
           {/* popup: open card */}
