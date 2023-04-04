@@ -109,7 +109,7 @@ function App() {
     })
     .catch((error) => {
       console.log(error);
-    });;
+    });
   };
 
   const handleUpdateAvatar = ({ avatar }) => {
