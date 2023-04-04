@@ -1,5 +1,5 @@
 import PopupWithForm from "./PopupWithForm";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function AddPlacePopup(props) {
   const [cardName, setCardName] = useState("");
