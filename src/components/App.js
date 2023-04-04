@@ -29,7 +29,6 @@ function App() {
                 owner: card.owner,
                 })));
                 
-                console.log(cardListData);
          }) 
          .catch((error) => {
             console.log(error.message);
@@ -79,7 +78,13 @@ function App() {
     api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
-} 
+  } 
+
+  const handleCardDelete = (card) => {
+    api.deleteCard(card._id).then((response) => {
+      setCards((state) => state.filter((c) => c._id !== card._id ? c : null));
+    });
+  } 
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -92,6 +97,7 @@ function App() {
             onAddCard={handleAddCardClick}
             onCardClick={handleCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
             cards={cards}
           />
           <Footer />

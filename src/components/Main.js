@@ -1,5 +1,4 @@
 import {useState, useEffect, useContext} from 'react';
-import api from '../utils/Api';
 import Card from './Card';
 import { CurrentUserContext } from './../contexts/CurrentUserContext';
 
@@ -56,6 +55,8 @@ function Main(props) {
               _id={card._id}
               onCardClick={props.onCardClick}
               onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
+              
             />
           ))}
         </ul>

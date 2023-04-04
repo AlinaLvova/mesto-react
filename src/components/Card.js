@@ -22,6 +22,10 @@ function Card(card) {
   const handleClickLikeCard = () => {
     card.onCardLike(card);
   }
+
+  const handleDeleteClick = () => {
+    card.onCardDelete(card);
+  }
          
   return (
     <li className="card" key={card._id}>
@@ -30,6 +34,7 @@ function Card(card) {
           <button
             className="card__delete link card__delete_active"
             aria-label="to-delete-card"
+            onClick={handleDeleteClick}
           ></button>
         )}
         {imageError ? (
