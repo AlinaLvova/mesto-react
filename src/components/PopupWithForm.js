@@ -4,7 +4,7 @@ function PopupWithForm(props){
             <div className="popup__container">
                 <button className="popup__close-btn link" id="close-btn-edit" type="button"
                     aria-label="close edit form"  onClick={props.onClose}></button>
-                <form className="popup__form" method="POST" name={`${props.name}-form`} noValidate>
+                <form className="popup__form" method="POST" name={`${props.name}-form`} noValidate onSubmit={props.onSubmit}>
                     <h3 className="popup__title">{props.title}</h3>
                     {props.children}
                     <button className="popup__submit-btn link" type="submit">{props.buttonTitle}</button>

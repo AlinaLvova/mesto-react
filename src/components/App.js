@@ -87,6 +87,13 @@ function App() {
     });
   } 
 
+  const handleUpdateUser = ({name, about}) => {
+    api.updateUserInfo(name, about).then((user) => {
+      setCurrentUser(user);
+    });
+
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -105,6 +112,7 @@ function App() {
           {/* popup: edit profile */}
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
+            onUpdateUser={handleUpdateUser}
             onClose={closeAllPopups}>
           </EditProfilePopup>
           {/* popup: confirmation */}
