@@ -1,8 +1,14 @@
 import PopupWithForm from "./PopupWithForm";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 function EditAvatarPopup(props) {
   const avatarInput = useRef('');
+
+  useEffect(() => {
+    if (props.isOpen) {
+      avatarInput.current.value = '';
+    }
+  }, [props.isOpen]);
 
   const handleSubmit = (e) => {
     // Запрещаем браузеру переходить по адресу формы
@@ -11,7 +17,7 @@ function EditAvatarPopup(props) {
     // Передаём значения управляемых компонентов во внешний обработчик
     props.onUpdateAvatar({
         avatar: avatarInput.current.value
-    });
+    })
   };
 
   return (
